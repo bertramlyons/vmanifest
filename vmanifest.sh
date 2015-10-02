@@ -7,7 +7,7 @@
 #  ** Runs diff against old manifest and new manifest and reports result
 #  * Not recursive
 #
-#  Remember to make the script executable - chmod +x crystal.sh
+#  Remember to make the script executable - chmod +x vmanifest.sh
 #
 #  Requirements: for MAC OS only
 #  This is an example script written at IASA, 2015
