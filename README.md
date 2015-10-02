@@ -4,6 +4,7 @@ Verifies unconventional bag structure: when a directory contains individual .md5
 Current assumptions include:
 
 1) All files must be in the same directory (with no subdirectories).
+
 2) The script assumes that for each content file there is an ancillary .md5 file (raw text) that contains one line in the following structure:
 
     [md5] [file name]
