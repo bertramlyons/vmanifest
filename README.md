@@ -1,5 +1,5 @@
 # vmanifest
-Verifies unconventional bag structure: when a directory contains individual .md5 files for each content file.
+Bash script (mac os) to verify unconventional md5 manifest structure: when a directory contains individual .md5 files for each content file.
 
 Current assumptions include:
 
