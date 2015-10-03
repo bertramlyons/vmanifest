@@ -1,6 +1,18 @@
 # vmanifest
 Bash script (mac os) to verify unconventional md5 manifest structure: when a directory contains individual .md5 files for each content file.
 
+Installation:
+
+    Make the script executable on your machine. Change to the directory where your script is. Then use:
+    chmod 777 vmanifest.sh
+
+If you don't put the script in your path, you'll need to run it by addressing its full path, for example:
+
+    If your working directory is the directory where the script is:
+        ./vmanifest.sh [/full/Path/Of/Content/And/Md5s]
+    If your working directory is not the same directory as the script:
+        /Users/bertramlyons/desktop/tools/vmanifest/vmanifest.sh [/full/Path/Of/Content/And/Md5s]
+
 Current assumptions include:
 
 1) All files must be in the same directory (with no subdirectories).
