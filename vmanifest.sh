@@ -46,7 +46,7 @@ echo ""
 # change the OUTPATH below to specify a different location for output files
 
 echo "Creating new metadata folder for the requested directory..."
-OUTPATH="~/desktop/md5_verification"
+OUTPATH=~/desktop/md5_verification
 mkdir $OUTPATH
 echo ""
 
@@ -90,16 +90,16 @@ RESULT=$(diff -s manifest.txt nmanifest.txt)
 
 if [ "$RESULT" = "Files manifest.txt and nmanifest.txt are identical" ]
 then
-    echo "MD5 Verifier Tool" >> ./verification_result.txt
+    echo "MD5 Verifier Tool" >> $OUTPATH/verification_result.txt
     NOW=$(date)
-    echo "Date performed: $NOW" >> ./verification_result.txt
-    echo "$COUNTERMD5 md5s found" >> ./verification_result.txt
-    echo "$COUNTERFILE files evaluated" >> ./verification_result.txt
-    echo "Result: All files are accounted for and all files match previous MD5s." >> ./verification_result.txt
-    echo "" >> ./verification_result.txt
-    echo "Files verified:" >> ./verification_result.txt
+    echo "Date performed: $NOW" >> $OUTPATH/verification_result.txt
+    echo "$COUNTERMD5 md5s found" >> $OUTPATH/verification_result.txt
+    echo "$COUNTERFILE files evaluated" >> $OUTPATH/verification_result.txt
+    echo "Result: All files are accounted for and all files match previous MD5s." >> $OUTPATH/verification_result.txt
+    echo "" >> $OUTPATH/verification_result.txt
+    echo "Files verified:" >> $OUTPATH/verification_result.txt
     FILES=$(cat $OUTPATH/manifest.txt)
-    echo "$FILES" >> ./verification_result.txt
+    echo "$FILES" >> $OUTPATH/verification_result.txt
 # inform user of success and how many files processed
     echo ""
     echo "Analysis complete."
@@ -116,13 +116,13 @@ else
     then
         if [ $MD5CHECK -lt $FILECHECK ]
         then
-            echo "MD5 Verifier Tool" >> ./verification_result.txt
+            echo "MD5 Verifier Tool" >> $OUTPATH/verification_result.txt
             NOW=$(date)
-            echo "Date performed: $NOW" >> ./verification_result.txt
-            echo "$COUNTERMD5 md5s found" >> ./verification_result.txt
-            echo "$COUNTERFILE files evaluated" >> ./verification_result.txt
-            echo "There are more files here than checksums to verify." >> ./verification_result.txt
-            echo "Result: $RESULT." >> ./verification_result.txt
+            echo "Date performed: $NOW" >> $OUTPATH/verification_result.txt
+            echo "$COUNTERMD5 md5s found" >> $OUTPATH/verification_result.txt
+            echo "$COUNTERFILE files evaluated" >> $OUTPATH/verification_result.txt
+            echo "There are more files here than checksums to verify." >> $OUTPATH/verification_result.txt
+            echo "Result: $RESULT." >> $OUTPATH/verification_result.txt
 # inform user of success and how many files processed
             echo ""
             echo "Analysis complete."
@@ -134,13 +134,13 @@ else
             echo ""
             exit
         else
-            echo "MD5 Verifier Tool" >> ./verification_result.txt
+            echo "MD5 Verifier Tool" >> $OUTPATH/verification_result.txt
             NOW=$(date)
-            echo "Date performed: $NOW" >> ./verification_result.txt
-            echo "$COUNTERMD5 md5s found" >> ./verification_result.txt
-            echo "$COUNTERFILE files evaluated" >> ./verification_result.txt
-            echo "There are more checksums here than files to verify." >> ./verification_result.txt
-            echo "Result: $RESULT." >> ./verification_result.txt
+            echo "Date performed: $NOW" >> $OUTPATH/verification_result.txt
+            echo "$COUNTERMD5 md5s found" >> $OUTPATH/verification_result.txt
+            echo "$COUNTERFILE files evaluated" >> $OUTPATH/verification_result.txt
+            echo "There are more checksums here than files to verify." >> $OUTPATH/verification_result.txt
+            echo "Result: $RESULT." >> $OUTPATH/verification_result.txt
 # inform user of success and how many files processed
             echo ""
             echo "Analysis complete."
@@ -153,13 +153,13 @@ else
             exit
         fi
     else
-        echo "MD5 Verifier Tool" >> ./verification_result.txt
+        echo "MD5 Verifier Tool" >> $OUTPATH/verification_result.txt
         NOW=$(date)
-        echo "Date performed: $NOW" >> ./verification_result.txt
-        echo "$COUNTERMD5 md5s found" >> ./verification_result.txt
-        echo "$COUNTERFILE files evaluated" >> ./verification_result.txt
-        echo "Checksums do not match." >> ./verification_result.txt
-        echo "Result: $RESULT." >> ./verification_result.txt
+        echo "Date performed: $NOW" >> $OUTPATH/verification_result.txt
+        echo "$COUNTERMD5 md5s found" >> $OUTPATH/verification_result.txt
+        echo "$COUNTERFILE files evaluated" >> $OUTPATH/verification_result.txt
+        echo "Checksums do not match." >> $OUTPATH/verification_result.txt
+        echo "Result: $RESULT." >> $OUTPATH/verification_result.txt
 # inform user of success and how many files processed
         echo ""
         echo "Analysis complete."
