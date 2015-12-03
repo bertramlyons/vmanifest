@@ -5,12 +5,12 @@
 #  ** Generates manifest of md5s from individual md5 text files
 #  ** Creates new md5s of the payload files
 #  ** Runs diff against old manifest and new manifest and reports result
-#  * Not recursive
+#  * Not recursive - input directory must contain all files directly
 #
-#  Remember to make the script executable - chmod +x vmanifest.sh
+#  Remember to make the script executable: chmod +x vmanifest.sh
 #
-#  Requirements: for MAC OS only
-#  This is an example script written at IASA, 2015
+#  Requirements: for MAC OS only, assumes existence of MD5 utility that comes with MAC OS
+#  This is an example script written by Bertram Lyons at IASA, 2015, in Paris, France for demonstration
 
 
 #  the version of the script
@@ -42,25 +42,29 @@ pwd
 echo ""
 echo ""
 
-# create new directory on the users desktop called "md5_verification" and inform user
+# create new directory on the user's desktop called "md5_verification" and inform user
+# change the OUTPATH below to specify a different location for output files
 
 echo "Creating new metadata folder for the requested directory..."
-mkdir ~/desktop/md5_verification
+OUTPATH="~/desktop/md5_verification"
+mkdir $OUTPATH
 echo ""
 
-# begin gathering md5s from all .md5 files in directory and
-# placing results in a manifest.txt file
+# begin accumulating md5s from all .md5 files in directory and
+# placing results in a single new manifest.txt file
 
 echo "Extracting pre-written md5s from md5 files..."
 COUNTERMD5=0
 for i in *.md5; do
 
-#   NAME=${i%.*}
 COUNTERMD5=$(("$COUNTERMD5"+1));
 ENTRY=$(sed -n '1p' "$i");
-echo $ENTRY >> ~/desktop/md5_verification/manifest.txt;
+echo $ENTRY >> $OUTPATH/manifest.txt;
 unset ENTRY;
 done
+
+# begin generating new md5s from all content files in directory and
+# placing results in a single new nmanifest.txt file
 
 echo ""
 echo "Generating new md5s for payload files..."
@@ -69,18 +73,21 @@ COUNTERFILE=0
 for i in !(*.md5);
 do COUNTERFILE=$(("$COUNTERFILE"+1));
 NENTRY=$(md5 -r "$i");
-echo $NENTRY >> ~/desktop/md5_verification/nmanifest.txt;
+echo $NENTRY >> $OUTPATH/nmanifest.txt;
 unset NENTRY;
 done
+
+# compare old md5 manifest with new md5 manifest to determine any issues
 
 echo ""
 echo "Comparing old md5s with new md5s..."
 
-cd ~/desktop/md5_verification
+cd $OUTPATH
 
 RESULT=$(diff -s manifest.txt nmanifest.txt)
 
-# determine problem
+# determine if any problems exist based on the results of the diff function above
+
 if [ "$RESULT" = "Files manifest.txt and nmanifest.txt are identical" ]
 then
     echo "MD5 Verifier Tool" >> ./verification_result.txt
@@ -91,9 +98,9 @@ then
     echo "Result: All files are accounted for and all files match previous MD5s." >> ./verification_result.txt
     echo "" >> ./verification_result.txt
     echo "Files verified:" >> ./verification_result.txt
-    FILES=$(cat ~/desktop/md5_verification/manifest.txt)
+    FILES=$(cat $OUTPATH/manifest.txt)
     echo "$FILES" >> ./verification_result.txt
-# inform user of success and how many file processed
+# inform user of success and how many files processed
     echo ""
     echo "Analysis complete."
     echo "$COUNTERMD5 md5s found"
@@ -104,7 +111,7 @@ then
     exit
 else
     MD5CHECK=$(("$COUNTERMD5"-"$COUNTERFILE"))
-    FILECHECK=$(("COUNTERFILE"-"$COUNTERMD5"))
+    FILECHECK=$(("$COUNTERFILE"-"$COUNTERMD5"))
     if [ $MD5CHECK -ne $FILECHECK ]
     then
         if [ $MD5CHECK -lt $FILECHECK ]
@@ -116,7 +123,7 @@ else
             echo "$COUNTERFILE files evaluated" >> ./verification_result.txt
             echo "There are more files here than checksums to verify." >> ./verification_result.txt
             echo "Result: $RESULT." >> ./verification_result.txt
-# inform user of success and how many file processed
+# inform user of success and how many files processed
             echo ""
             echo "Analysis complete."
             echo "$COUNTERMD5 md5s found"
@@ -134,7 +141,7 @@ else
             echo "$COUNTERFILE files evaluated" >> ./verification_result.txt
             echo "There are more checksums here than files to verify." >> ./verification_result.txt
             echo "Result: $RESULT." >> ./verification_result.txt
-# inform user of success and how many file processed
+# inform user of success and how many files processed
             echo ""
             echo "Analysis complete."
             echo "$COUNTERMD5 md5s found"
@@ -153,7 +160,7 @@ else
         echo "$COUNTERFILE files evaluated" >> ./verification_result.txt
         echo "Checksums do not match." >> ./verification_result.txt
         echo "Result: $RESULT." >> ./verification_result.txt
-# inform user of success and how many file processed
+# inform user of success and how many files processed
         echo ""
         echo "Analysis complete."
         echo "$COUNTERMD5 md5s found"
