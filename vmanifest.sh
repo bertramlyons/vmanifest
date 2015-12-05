@@ -44,11 +44,12 @@ echo ""
 
 # create new directory on the user's desktop called "md5_verification" and inform user
 # change the OUTPATH below to specify a different location for output files
-
-echo "Creating new metadata folder for the requested directory..."
 OUTPATH=~/desktop/md5_verification
-mkdir $OUTPATH
-echo ""
+if [ ! -d "$OUTPATH" ]; then
+    echo "Creating new metadata folder for the requested directory..."
+    mkdir -p "$OUTPATH"
+    echo ""
+fi
 
 # begin accumulating md5s from all .md5 files in directory and
 # placing results in a single new manifest.txt file
