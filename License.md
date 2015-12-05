@@ -4,7 +4,7 @@ Copyright (C) 2015 www.avpreserve.com, info@avpreserve.com
 
 vmanifest is licensed under an Apache License, Version 2.0
 
-vmanifest is a utility for the documentation and regular review of stored files. Fixity scans a folder or directory, creating a manifest of the files including their file paths and their checksums, against which a regular comparative analysis can be run. Fixity monitors file integrity through generation and validation of checksums, and file attendance through monitoring and reporting on new, missing, moved and renamed files. Fixity emails a report to the user documenting flagged items along with the reason for a flag, such as that a file has been moved to a new location in the directory, has been edited, or has failed a checksum comparison for other reasons. Supplementing tools like BagIt that review files at points of exchange, when run regularly Fixity becomes a powerful tool for monitoring digital files in repositories, servers, and other long-term storage locations.
+vmanifest is Bash script (mac os) to verify unconventional md5 manifest structure: when a directory contains individual .md5 files for each content file.
 
 vmanifest License
 
