@@ -30,6 +30,7 @@ Current assumptions include:
 3) The script will write the results to a new folder created on the user's desktop called "md5_verification".
 4) That md5 is the algorithm used for the original checksums.
 
+
 Functionality:
 
 1) User submits a target path (must be verbose from the root, not relative).
@@ -54,7 +55,7 @@ Functionality:
 
 Dangers:
 
-Existence of .DS_Store files in the target folder will cause the script to report a failure, unless there is a corresponding .md5 file for the particular .DS_Store file
+Existence of .DS_Store files in the target folder may cause the script to report a failure, unless there is a corresponding .md5 file for the particular .DS_Store file
 
 Not heavily tested for possible errors. The script was written to solve a specific use case. It may need to be adjusted as the use cases begin to vary.
 
