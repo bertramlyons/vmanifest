@@ -28,7 +28,7 @@ echo "AVPreserve, 2015; running `date`"
 
 # syntax check (must have only one parameter: input directory)
 
-if [ -z "$1" ];
+if [ ! -d "$1" ];
 then echo "Syntax: $0 <input directory>"
 exit 1
 fi
