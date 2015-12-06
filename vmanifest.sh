@@ -65,14 +65,10 @@ COUNTERMD5=$(wc -l "$OUTPATH/manifest.txt" | awk '{print $1}')
 
 echo ""
 echo "Generating new md5s for payload files..."
-
-COUNTERFILE=0
-for i in !(*.md5);
-do COUNTERFILE=$(("$COUNTERFILE"+1));
-NENTRY=$(md5 -r "$i");
-echo $NENTRY >> $OUTPATH/nmanifest.txt;
-unset NENTRY;
-done
+ls -1 | grep -v ".md5$" | while read file ; do
+    md5 -r "$file"
+done  | sort -k2 > "$OUTPATH/nmanifest.txt"
+COUNTERFILE=$(wc -l "$OUTPATH/nmanifest.txt" | awk '{print $1}')
 
 # compare old md5 manifest with new md5 manifest to determine any issues
 
