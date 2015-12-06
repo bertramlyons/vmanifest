@@ -56,7 +56,7 @@ fi
 
 echo "Extracting pre-written md5s from md5 files..."
 cat *.md5 > "$OUTPATH/manifest.txt"
-COUNTERMD5=$(wc -l "$OUTPATH/manifest.txt" | sed 's/ //g')
+COUNTERMD5=$(wc -l "$OUTPATH/manifest.txt" | awk '{print $1}')
 
 # begin generating new md5s from all content files in directory and
 # placing results in a single new nmanifest.txt file
