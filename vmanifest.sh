@@ -55,14 +55,8 @@ fi
 # placing results in a single new manifest.txt file
 
 echo "Extracting pre-written md5s from md5 files..."
-COUNTERMD5=0
-for i in *.md5; do
-
-COUNTERMD5=$(("$COUNTERMD5"+1));
-ENTRY=$(sed -n '1p' "$i");
-echo $ENTRY >> $OUTPATH/manifest.txt;
-unset ENTRY;
-done
+cat *.md5 > "$OUTPATH/manifest.txt"
+COUNTERMD5=$(wc -l "$OUTPATH/manifest.txt" | sed 's/ //g')
 
 # begin generating new md5s from all content files in directory and
 # placing results in a single new nmanifest.txt file
