@@ -77,7 +77,7 @@ echo "Comparing old md5s with new md5s..."
 
 cd "$OUTPATH"
 
-RESULT=$(diff -s manifest.txt nmanifest.txt)
+RESULT=$(diff -swB manifest.txt nmanifest.txt)
 
 # determine if any problems exist based on the results of the diff function above
 
