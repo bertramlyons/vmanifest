@@ -55,7 +55,9 @@ fi
 # placing results in a single new manifest.txt file
 
 echo "Extracting pre-written md5s from md5 files..."
-cat *.md5 > "$OUTPATH/manifest.txt"
+ls -1 | grep ".md5$" | while read file ; do
+    cat "$file"
+done | sort -k2 > "$OUTPATH/manifest.txt"
 COUNTERMD5=$(wc -l "$OUTPATH/manifest.txt" | awk '{print $1}')
 
 # begin generating new md5s from all content files in directory and
