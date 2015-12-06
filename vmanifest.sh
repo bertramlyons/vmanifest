@@ -18,9 +18,7 @@
 VERSION=1.0
 
 
-#  Clear the Terminal and announce the tool
-
-clear
+#  announce the tool
 echo "MD5 Manifest Verifier: Version - $VERSION"
 echo "Written for IASA  demonstration only"
 echo "AVPreserve, 2015; running `date`"
